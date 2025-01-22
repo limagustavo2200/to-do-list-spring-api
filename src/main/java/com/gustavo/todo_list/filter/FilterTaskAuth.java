@@ -12,6 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
+// Filtro para autenticar os usuarios na criação de tasks
 @Component
 public class FilterTaskAuth extends OncePerRequestFilter {
 
@@ -22,14 +24,17 @@ public class FilterTaskAuth extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws ServletException, IOException {
-
+        
+        // Salva o valor do path em servletPath
         var servletPath = request.getServletPath();
-                
-        if (servletPath.equals("/tasks/")) {
-            // Pegar autenticação (usuario e senha)
+        
+        // Verifica se o Path inicia com a "/tasks/" e entro no if
+        if (servletPath.startsWith("/tasks/")) {
+            // Pegar autenticação (usuario e senha) que é passando no header da requisição
             var authorization = request.getHeader("Authorization");  
-                
-            var authEncoded = authorization.substring("Basic".length()).trim();  // pegando o valor do auth e removendo o basic e depois removendo os espaços com o trim
+            
+            // pegando o valor do auth e removendo o basic e depois removendo os espaços com o trim
+            var authEncoded = authorization.substring("Basic".length()).trim();  
                     
             byte[] authDecode = Base64.getDecoder().decode(authEncoded);
 
@@ -43,7 +48,7 @@ public class FilterTaskAuth extends OncePerRequestFilter {
             System.out.println(username);
             System.out.println(password);
 
-            // validar usuario
+            // validar usuario que veio do header da requisição e tratado acima seprando em variaveis especificas como username e password
             var user = this.userRepository.findByUsername(username);
             if (user == null) {
                 response.sendError(401);
@@ -51,6 +56,9 @@ public class FilterTaskAuth extends OncePerRequestFilter {
                 // validar senha
                 var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
                 if(passwordVerify.verified) {
+
+                    // Se as credenciais (usuário e senha) passadas no cabeçalho da requisição forem validadas com sucesso no banco de dados,
+                    // o filtro atribui o ID do usuário autenticado ao atributo "idUser" da requisição.
                     request.setAttribute("idUser", user.getId());
                     filterChain.doFilter(request, response);
                 } else {
