@@ -51,7 +51,7 @@ public class FilterTaskAuth extends OncePerRequestFilter {
             // validar usuario que veio do header da requisição e tratado acima seprando em variaveis especificas como username e password
             var user = this.userRepository.findByUsername(username);
             if (user == null) {
-                response.sendError(401);
+                response.sendError(401, "Usuário não encontrado!");
             } else {
                 // validar senha
                 var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
@@ -62,7 +62,7 @@ public class FilterTaskAuth extends OncePerRequestFilter {
                     request.setAttribute("idUser", user.getId());
                     filterChain.doFilter(request, response);
                 } else {
-                    response.sendError(401);
+                    response.sendError(401, "Credenciais incorretas!");
                 }
             }     
         } else {
