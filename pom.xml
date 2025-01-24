@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> 
 	</parent>
 	<groupId>com.gustavo</groupId>
 	<artifactId>todo-list</artifactId>
@@ -42,11 +42,11 @@
 		</dependency>
 
 		<dependency>
-        	<groupId>org.projectlombok</groupId>
-       		<artifactId>lombok</artifactId>
-        	<version>1.18.24</version> 
-        	<scope>provided</scope>
-    	</dependency>
+    		<groupId>org.projectlombok</groupId>
+    		<artifactId>lombok</artifactId>
+    		<version>1.18.28</version> <!-- Atualize para a versão mais recente -->
+    		<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
