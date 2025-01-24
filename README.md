@@ -104,10 +104,7 @@ docker build -t todo-list-api
 ```bash
 docker run -p 8080:8080 todo-list-api
 ```
-
-3. Execute o projeto
-```bash
-mvn spring-boot:run
+O projeto estará disponível em http://localhost:8080
 
 ## Instrução de uso
 
