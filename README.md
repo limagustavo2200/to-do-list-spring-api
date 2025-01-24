@@ -159,6 +159,11 @@ PUT /tasks/{idTask}
 - ❓ 404: Recurso não encontrado
 - 💥 500: Erro interno do servidor
 
+### 🌍 Deploy
+A API foi publicada na plataforma Render e está disponível para uso no seguinte link:
+👉 https://to-do-list-spring-api.onrender.com
+
+Com isso, a aplicação está acessível para testes e produção em um ambiente confiável e escalável.
 
 ### Observações importantes:
 - Todas as requisições para `/tasks` necessitam de autenticação
