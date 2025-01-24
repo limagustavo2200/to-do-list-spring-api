@@ -10,6 +10,7 @@ API de gerenciamento de tarefas (Todo List) que permite aos usuários criar e ge
 - 📚 JPA/Hibernate
 - 🔐 BCrypt (para criptografia de senhas)
 - 🧩 Base64 (para codificação)
+- 🐳 Docker (para containerização)
 
 O projeto foi desenvolvido para demonstrar a implementação de uma API RESTful com autenticação e persistência de dados, utilizando boas práticas de desenvolvimento e segurança.
 
@@ -28,7 +29,8 @@ todo-list-spring-api/
 │   │   └── resources/
 │   │       └── application.properties
 │   └── test/                                         
-├── .gitattributes                  
+├── .gitattributes 
+├── Dockerfile                  
 ├── .gitignore                      
 ├── mvnw                          
 ├── mvnw.cmd                       
@@ -70,10 +72,11 @@ Validações:
 
 ### Pré-requisitos
 - ☕ Java JDK 17 ou superior
+- 🐳 Docker
 - 🛠️ Maven
 - 💻 IDE de sua preferência (recomendado: IntelliJ IDEA ou VS Code)
 
-### Etapas
+### Etapas (sem Docker)
 
 1. Clone o repositório
 ```bash
@@ -89,6 +92,22 @@ cd to-do-list-spring-api
 ```bash
 mvn spring-boot:run
 ```
+
+### Etapas (com Docker)
+
+1. Construa a imagem Docker
+```bash
+docker build -t todo-list-api
+```
+
+2. Execute o container:
+```bash
+docker run -p 8080:8080 todo-list-api
+```
+
+3. Execute o projeto
+```bash
+mvn spring-boot:run
 
 ## Instrução de uso
 
