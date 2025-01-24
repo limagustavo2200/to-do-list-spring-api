@@ -25,4 +25,5 @@ EXPOSE ${PORT}
 COPY --from=build /app/target/todo-list-0.0.1-SNAPSHOT.jar app.jar
 
 # Define o comando de execução, usando a variável de ambiente PORT
-ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=${PORT}"]
+ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=8080"]
+
